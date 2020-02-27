@@ -1,0 +1,1 @@
+// Component maps over array of recipes and creates a RecipeCard for each.
