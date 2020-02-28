@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu+Condensed&display=swap");
+
+* {
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+.recipeList__container {
+	/* border: 2px solid seagreen; */
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 1em;
+	font-family: "Ubuntu Condensed";
+}
+
+.recipe__container {
+	box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+	border-radius: 6px;
+	display: flex;
+	flex-flow: column wrap;
+	transition: 0.2s ease-in;
+	cursor: pointer;
+}
+
+.recipe__container img {
+	border-radius: 6px 6px 0 0;
+}
+
+.recipe__body {
+	padding: 0 0.5em 0.5em 0.5em;
+	line-height: 0.6;
+}
+
+.recipe__title {
+}
+.recipe__source {
+	font-style: italic;
+}
+.recipe__author {
+	font-style: italic;
+}
+.recipe__label__container {
+	text-align: right;
+}
+.recipe__label {
+	padding: 0.15em;
+	border: 1px solid darkgray;
+	border-radius: 5px;
+
+	background-color: #fff;
+	color: darkgray;
+}
+
+.recipe__label:hover {
+	cursor: pointer;
+	border: 1px solid darkgray;
+	background-color: darkgray;
+	color: #fff;
+}
