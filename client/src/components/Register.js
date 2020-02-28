@@ -24,8 +24,9 @@ const Register = ({ values, errors, touched }) => {
             <br />
             <button type="submit">Register</button>
         </Form>
-    )
-    }
+    );
+};
+
 const FormikRegister = withFormik({
     mapPropsToValues({ fname, lname, uid, password, passwordConfirmation }) {
         return {
