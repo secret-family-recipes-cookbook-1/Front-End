@@ -11,7 +11,6 @@ import LandingPage from "./components/LandingPage"
 import AddRecipe from "./components/AddRecipe"
 import RecipePage from './components/RecipePage';
 
-
 function App() {
 
   const [recipeList, setRecipeList] = useState();

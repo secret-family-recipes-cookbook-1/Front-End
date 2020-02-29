@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios"; 
 
-const Login = ({ values, errors, touched }) => {
+const Login = ({ errors, touched }) => {
     return (
         <Form>
             <Field type="text" name="uid" placeholder="Username" />
