@@ -12,8 +12,7 @@ import RecipeContext from '../contexts/RecipeContext';
 const RecipePage = props => {
     const {recipeList, setRecipeList} = useContext(RecipeContext);  // Importing global recipe list context
     const [localRecipe, setLocalRecipe] = useState({});               // Local state slice for current recipe being viewed
-    const [editing, setEditing] = useState(true);                  // Editing toggle. Defaults to FALSE.
-
+    const [editing, setEditing] = useState(false);                  // Editing toggle. Defaults to FALSE
     // {
     //     title: '',
     //     ingredients: [],
@@ -29,13 +28,15 @@ const RecipePage = props => {
 
     useEffect(() => {
         console.log('recipeList ', recipeList[props.match.params.id]);
-        setLocalRecipe(recipeList[1]); // This is for mock data
+        setLocalRecipe(recipeList[props.match.params.id]); // This is for mock data
+
+        // ***** Cannot GET from API due to login errors and recipe endpoint requiring auth :(
         // axiosWithAuth()
-        //     .get(`/recipe/${props.match.params.id}`)
-        //     .then(res => setLocalRecipe(res.data))
+        //     .get(`/recipes/${props.match.params.id}`)
+        //     .then(res => console.log(res))
         
     }, []);
-    console.log('localRecipe ', localRecipe.ingredients);
+    console.log('localRecipe ', localRecipe);
     const handleEdit = () => {                                      // handleEdit manages editing and PUTting of data to the API
 
     }
@@ -90,9 +91,9 @@ const RecipePage = props => {
                         <div>
                             <h2>Ingredients</h2>
                             <ul>                                    {/* Map over data array and create list */} 
-                                {localRecipe.ingredients.map(item => {
+                                {localRecipe.ingredients.map((item, index) => {
                                     return (
-                                        <li>{item}</li>
+                                        <li>{`Step ${index + 1}: ${item}`}</li>
                                     );
                                 })}
                             </ul>
@@ -128,9 +129,9 @@ const RecipePage = props => {
                         <div>
                             <h2>Ingredients</h2>
                             <ul>                                    {/* Map over data array and create list */} 
-                                {/* {localRecipe.ingredients.map((item) => {
+                                {/* {localRecipe.ingredients.map((item, index) => {
                                     return (
-                                        <li>{item}</li>
+                                        <li>{`Step ${index + 1}: ${item}`}</li>
                                     );
                                 })} */}
                             </ul>
@@ -139,11 +140,7 @@ const RecipePage = props => {
                         <div>
                             <h2>Instructions</h2>
                             <ol>                                    {/* Map over data array and create list */} 
-                                {/* {localRecipe.ingredients.map((item) => {
-                                    return (
-                                        <li>{item}</li>
-                                    );
-                                })} */}
+                                {localRecipe.instructions}
                             </ol>
                         </div>
                     </section>

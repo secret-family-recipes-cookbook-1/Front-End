@@ -1,26 +1,23 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Register = ({ errors, touched }) => {
     
     return (
         <Form>
-            <Field type="text" name="fname" placeholder="First name" />
-            {touched.fname && errors.fname && <div>{errors.fname}</div>}
+            <Field type="text" name="firstName" placeholder="First name" />
+            {touched.firstName && errors.firstName && <div>{errors.firstName}</div>}
             <br />
-            <Field type="text" name="lname" placeholder="Last name" />
-            {touched.lname && errors.lname && <div>{errors.lname}</div>}
+            <Field type="text" name="lastName" placeholder="Last name" />
+            {touched.lastName && errors.lastName && <div>{errors.lastName}</div>}
             <br />
-            <Field type="text" name ="uid" placeholder="Username" />
-            {touched.uid && errors.uid && <div>{errors.uid}</div>}
+            <Field type="email" name ="email" placeholder="Email" />
+            {touched.email && errors.email && <div>{errors.email}</div>}
             <br />
             <Field type="password" name="password" placeholder="Password" />
             {touched.password && errors.password && <div>{errors.password}</div>}
-            <br />
-            <Field type="password" name="passwordConfirmation" placeholder="Confirm password" />
-            {touched.passwordConfirmation && errors.passwordConfirmation && <div>{errors.passwordConfirmation}</div>}
             <br />
             <button type="submit">Register</button>
         </Form>
@@ -28,37 +25,26 @@ const Register = ({ errors, touched }) => {
 };
 
 const FormikRegister = withFormik({
-    mapPropsToValues({ fname, lname, uid, password, passwordConfirmation }) {
+    mapPropsToValues({ firstName, lastName, email, password }) {
         return {
-            fname: fname || "",
-            lname: lname || "",
-            uid: uid || "",
+            firstName: firstName || "",
+            lastName: lastName || "",
+            email: email || "",
             password: password || "",
-            passwordConfirmation: passwordConfirmation || ""
         };
     },
     validationSchema: Yup.object().shape({
-        fname: Yup.string()
-            .required("You must enter your first name.")
-            .min(2, "First name must be at least two characters."),
-        lname: Yup.string()
-            .required("You must enter your last name.")
-            .min(2, "Last name must be at least two characters."),
-        uid: Yup.string()
-            .required("You must choose a username.")
-            .min(5, "Username must be at least 5 characters."),
-        password: Yup.string()
-            .required("You must enter a password.")
-            .min(6, "Password must be at least 6 characters."),
-        passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], "Passwords must match")
+        firstName: Yup.string().required("You must enter your first name.").min(2, "First name must be at least two characters."),
+        lastName: Yup.string().required("You must enter your last name.").min(2, "Last name must be at least two characters."),
+        email: Yup.string().required("You must enter a valid email.").email(),
+        password: Yup.string().required("You must enter a password.").min(6, "Password must be at least 6 characters.")
     }),
-    handleSubmit(values, { resetForm }) {
-        axios
-            .post("https://reqres.in/api/users", values)
+    handleSubmit(values) {
+        console.log('Submitting values: ', values);
+        axiosWithAuth()
+            .post("/auth/register", values)
             .then(res => {
                 console.log('Success!', res);
-                resetForm();
             })
             .catch(err => console.log(err.response));
     }
