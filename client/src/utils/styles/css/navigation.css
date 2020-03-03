@@ -1,0 +1,40 @@
+.navBar {
+	border: 2px solid #8b9dfc;
+	background-color: #8b9dfc;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.navBar__logo__container {
+	/* border: 1px solid brown; */
+	padding: 15px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 30%;
+	height: 100%;
+}
+
+.navBar__links__container {
+	/* border: 1px solid greenyellow; */
+	width: 70%;
+	height: 100%;
+}
+
+.navBar__signedIn__links,
+.navBar__signedOut__links {
+	/* border: 1px solid whitesmoke; */
+	padding: 15px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.navBar__links__container ul a {
+	margin-left: 20px;
+}
