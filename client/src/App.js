@@ -173,8 +173,8 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route path="/recipes" component={RecipeList} />
-            <Route path="/add-recipe" component={AddRecipe} />
+            <Route exact path="/recipes" component={RecipeList} />
+            <Route exact path="/add-recipe" component={AddRecipe} />
             <Route exact path="/recipes/:id" component={RecipeDetails} />
           </Switch>
           {/* <Switch>
