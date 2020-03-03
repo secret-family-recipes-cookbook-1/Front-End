@@ -3,8 +3,6 @@
 import React, { useState, useContext } from "react";
 import RecipeContext from "../contexts/RecipeContext";
 import { Link } from "react-router-dom";
-// import RecipeCard from "./RecipeCard";
-import Modal from "react-modal";
 
 import "../utils/styles/css/Recipe.css";
 
