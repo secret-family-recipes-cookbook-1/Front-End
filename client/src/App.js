@@ -4,14 +4,14 @@ import RecipeContext from "./contexts/RecipeContext";
 
 import "./utils/styles/css/index.css";
 
+import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
-import UserProfile from "./components/UserProfile";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import LandingPage from "./components/LandingPage";
 import AddRecipe from "./components/AddRecipe";
 import RecipeDetails from "./components/RecipeDetails";
+import RecipeList from "./components/RecipeList";
 
 function App() {
   let mockData = [
@@ -33,8 +33,7 @@ function App() {
         chopped fresh oregano for garnish`
       ],
       source: "Chef John",
-      instructions:
-        `Preheat oven to 425 degrees F (220 degrees C). Lightly oil a large roasting pan.
+      instructions: `Preheat oven to 425 degrees F (220 degrees C). Lightly oil a large roasting pan.
         Place chicken pieces in large bowl. Season with salt, oregano, pepper, rosemary, and cayenne pepper. Add fresh lemon juice, olive oil, and garlic. Place potatoes in bowl with the chicken; stir together until chicken and potatoes are evenly coated with marinade.
         Transfer chicken pieces, skin side up, to prepared roasting pan, reserving marinade. Distribute potato pieces among chicken thighs. Drizzle with 2/3 cup chicken broth. Spoon remainder of marinade over chicken and potatoes.
         Place in preheated oven. Bake in the preheated oven for 20 minutes. Toss chicken and potatoes, keeping chicken skin side up; continue baking until chicken is browned and cooked through, about 25 minutes more. An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C). Transfer chicken to serving platter and keep warm.
@@ -174,17 +173,17 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route path="/profile" component={UserProfile} />
+            <Route path="/recipes" component={RecipeList} />
             <Route path="/add-recipe" component={AddRecipe} />
-            <Route exact path="/recipe/:id" component={RecipeDetails} />
+            <Route exact path="/recipes/:id" component={RecipeDetails} />
           </Switch>
           {/* <Switch>
             <ProtectedRoute exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <ProtectedRoute path="/profile" component={UserProfile} />
+            <ProtectedRoute path="/recipes" component={RecipeList} />
             <ProtectedRoute path="/add-recipe" component={AddRecipe} />
-            <ProtectedRoute exact path="/recipe/:id" component={RecipeDetails} />
+            <ProtectedRoute exact path="/recipes/:id" component={RecipeDetails} />
           </Switch> */}
         </div>
       </RecipeContext.Provider>

@@ -3,11 +3,11 @@
 //  Option to delete recipe
 //  Option to edit recipe (Renders inline with turnary operator checking editing status)
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from "react";
 
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { useForm } from '../utils/useForm';
-import RecipeContext from '../contexts/RecipeContext';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useForm } from "../utils/useForm";
+import RecipeContext from "../contexts/RecipeContext";
 
 const RecipeDetails = props => {
     const {recipeList, setRecipeList} = useContext(RecipeContext);  // Importing global recipe list context
