@@ -45,7 +45,7 @@ const FormikLogin = withFormik({
 			.email(),
 		password: Yup.string()
 			.required("You must enter a password.")
-			.min(6, "Password must be at least 6 characters.")
+			.min(4, "Password must be at least 6 characters.")
 	}),
 	handleSubmit(values) {
 		console.log("Submitting values: ", values);
