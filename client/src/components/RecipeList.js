@@ -1,22 +1,25 @@
 // Component maps over array of recipes and creates a RecipeCard for each.
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import RecipeContext from "../contexts/RecipeContext";
 import { Link } from "react-router-dom";
-import MOCK_DATA from "../MOCK_DATA";
 
 import "../utils/styles/css/Recipe.css";
 
 const RecipeList = () => {
-	const [recipeList, setRecipeList] = useState(MOCK_DATA);
+	const { recipeList, setRecipeList } = useContext(RecipeContext);
+
 	console.log("MOCK DATA", recipeList);
 
-	const recipe = recipeList.map((recipe, index) => {
+	const recipe = recipeList.map(recipe => {
 		return (
-			<Link to='/recipe-card'>
-				<div key={index} className='recipe__container'>
-					<img src={recipe.image} />
+			<Link to={`/recipe-page/${recipe.id}`} key={recipe.id}>
+				<div className='recipe__container'>
+					<div className='recipe__image__container'>
+						<img src={recipe.image} />
+					</div>
 					<div className='recipe__body'>
-						<h3 className='recipe__title'>{recipe.title}</h3>
+						<h4 className='recipe__title'>{recipe.title}</h4>
 						<p className='recipe__source'>From {recipe.source}</p>
 						<p className='recipe__author'>
 							By {recipe.firstName} {recipe.lastName}
@@ -30,7 +33,11 @@ const RecipeList = () => {
 		);
 	});
 
-	return <div className='recipeList__container'>{recipe}</div>;
+	return (
+		<>
+			<div className='recipeList__container'>{recipe}</div>
+		</>
+	);
 };
 
 export default RecipeList;
