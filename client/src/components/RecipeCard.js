@@ -1,23 +1,29 @@
-// Card that give basic info about recipe and links to the RecipePage
-
 import React from "react";
 
 const RecipeCard = ({ recipe }) => {
+  const figureStyle = {
+    backgroundImage: "url(" + recipe.image + ")",
+    backgroundRepeat: "none",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    width: "275px",
+	height: "275px",
+	marginBottom: "10px"
+  };
+
   return (
-    <div className="recipe__container">
-      <div className="recipe__image__container">
-        <img src={recipe.image} />
-      </div>
-      <div className="recipe__body">
-        <h4 className="recipe__title">{recipe.title}</h4>
-        <p className="recipe__source">From {recipe.source}</p>
-        <p className="recipe__author">
+    <div className="recipe-card">
+      <figure style={figureStyle}></figure>
+      <main>
+        <h1>{recipe.title}</h1>
+        <h2>From {recipe.source}</h2>
+        <h2>
           By {recipe.firstName} {recipe.lastName}
-        </p>
-        <p className="recipe__label__container">
-          <span className="recipe__label">{recipe.category}</span>
-        </p>
-      </div>
+        </h2>
+        <h3>
+          <span>{recipe.category}</span>
+        </h3>
+      </main>
     </div>
   );
 };
