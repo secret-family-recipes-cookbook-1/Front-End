@@ -12,7 +12,8 @@ a {
 .recipeList__container {
 	/* border: 2px solid seagreen; */
 	display: flex;
-	justify-content: space-around;
+	flex-flow: row wrap;
+	justify-content: space-between;
 	align-items: center;
 	padding: 1em;
 	font-family: "Ubuntu Condensed";
@@ -28,6 +29,7 @@ a {
 	flex-flow: column nowrap;
 	transition: 0.2s ease-in;
 	cursor: pointer;
+	margin-bottom: 20px;
 }
 
 .recipe__image__container {
@@ -93,3 +95,23 @@ a {
 	background-color: darkgray;
 	color: #fff;
 }
+
+/* .recipe__card {
+	margin: 200px auto;
+	height: 300px;
+	width: 300px;
+	transition: all 13s;
+}
+
+.ReactModal__Overlay {
+	opacity: 0;
+	transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+	opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+	opacity: 0;
+} */
