@@ -9,7 +9,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { useForm } from '../utils/useForm';
 import RecipeContext from '../contexts/RecipeContext';
 
-const RecipePage = props => {
+const RecipeDetails = props => {
     const {recipeList, setRecipeList} = useContext(RecipeContext);  // Importing global recipe list context
     const [localRecipe, setLocalRecipe] = useState({});               // Local state slice for current recipe being viewed
     const [editing, setEditing] = useState(false);                  // Editing toggle. Defaults to FALSE
@@ -60,6 +60,15 @@ const RecipePage = props => {
     },
         submitCallback
     );
+
+    const figureStyle = {
+        backgroundImage: 'url(' + localRecipe.image + ')',
+        backgroundRepeat: 'none',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        width: '350px',
+        height: '350px'
+    };
 
     return (
         <div className='recipe-page'>
@@ -118,30 +127,22 @@ const RecipePage = props => {
                             <h3>By: {localRecipe.firstName} {localRecipe.lastName} | From: {localRecipe.source}</h3>
                             <h4>{localRecipe.category}</h4>
                         </div>
-                        <figure></figure>
+                        <figure style={figureStyle}></figure>
                     </section>
 
-                    <section>
-                    <p>{localRecipe.body}</p>
-                    </section>
+                    <main>
+                        <p>{localRecipe.body}</p>
+                    </main>
 
                     <section>
                         <div>
                             <h2>Ingredients</h2>
-                            <ul>                                    {/* Map over data array and create list */} 
-                                {/* {localRecipe.ingredients.map((item, index) => {
-                                    return (
-                                        <li>{`Step ${index + 1}: ${item}`}</li>
-                                    );
-                                })} */}
-                            </ul>
+                            <p>{localRecipe.ingredients}</p>
                             
                         </div>
                         <div>
                             <h2>Instructions</h2>
-                            <ol>                                    {/* Map over data array and create list */} 
-                                {localRecipe.instructions}
-                            </ol>
+                            <p>{localRecipe.instructions}</p>
                         </div>
                     </section>
                 </div>
@@ -150,4 +151,4 @@ const RecipePage = props => {
     );
 }
 
-export default RecipePage;
+export default RecipeDetails;

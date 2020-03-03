@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MOCK_DATA from "../MOCK_DATA";
 
-import "../utils/styles/css/Recipe.css";
 
 const RecipeList = () => {
 	const [recipeList, setRecipeList] = useState(MOCK_DATA);

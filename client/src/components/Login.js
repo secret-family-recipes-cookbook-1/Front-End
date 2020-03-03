@@ -19,7 +19,7 @@ const Login = ({ errors, touched }) => {
             <Field type="password" name="password" placeholder="Password" />
             {touched.password && errors.password && <div>{errors.password}</div>}
             <br />
-            <button type="submit">Register</button>
+            <button type="submit">Login</button>
         </Form>
     );
 };
@@ -37,7 +37,7 @@ const FormikLogin = withFormik({
         firstName: Yup.string().required("You must enter your first name.").min(2, "First name must be at least two characters."),
         lastName: Yup.string().required("You must enter your last name.").min(2, "Last name must be at least two characters."),
         email: Yup.string().required("You must enter a valid email.").email(),
-        password: Yup.string().required("You must enter a password.").min(6, "Password must be at least 6 characters.")
+        password: Yup.string().required("You must enter a password.").min(4, "Password must be at least 6 characters.")
     }),
     handleSubmit(values) {
         console.log('Submitting values: ', values);
