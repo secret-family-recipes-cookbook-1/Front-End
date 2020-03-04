@@ -31,12 +31,22 @@ function App() {
         3 russet potatoes, peeled and quartered
         2/3 cup chicken broth, plus splash to deglaze pan
         chopped fresh oregano for garnish`
-			],
-			source: "Chef John",
-			instructions: `Preheat oven to 425 degrees F (220 degrees C). Lightly oil a large roasting pan.
-        Place chicken pieces in large bowl. Season with salt, oregano, pepper, rosemary, and cayenne pepper. Add fresh lemon juice, olive oil, and garlic. Place potatoes in bowl with the chicken; stir together until chicken and potatoes are evenly coated with marinade.
-        Transfer chicken pieces, skin side up, to prepared roasting pan, reserving marinade. Distribute potato pieces among chicken thighs. Drizzle with 2/3 cup chicken broth. Spoon remainder of marinade over chicken and potatoes.
-        Place in preheated oven. Bake in the preheated oven for 20 minutes. Toss chicken and potatoes, keeping chicken skin side up; continue baking until chicken is browned and cooked through, about 25 minutes more. An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C). Transfer chicken to serving platter and keep warm.
+      ],
+      source: "Chef John",
+      instructions: 
+        `Preheat oven to 425 degrees F (220 degrees C).
+        Lightly oil a large roasting pan.
+        Place chicken pieces in large bowl.
+        Season with salt, oregano, pepper, rosemary, and cayenne pepper.
+        Add fresh lemon juice, olive oil, and garlic.
+        Place potatoes in bowl with the chicken; stir together until chicken and potatoes are evenly coated with marinade.
+        Transfer chicken pieces, skin side up, to prepared roasting pan, reserving marinade.
+        Distribute potato pieces among chicken thighs.
+        Drizzle with 2/3 cup chicken broth.
+        Spoon remainder of marinade over chicken and potatoes.
+        Place in preheated oven. Bake in the preheated oven for 20 minutes. Toss chicken and potatoes, keeping chicken skin side up; continue baking until chicken is browned and cooked through, about 25 minutes more.
+        An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C).
+        Transfer chicken to serving platter and keep warm.
         Set oven to broil or highest heat setting. Toss potatoes once again in pan juices. Place pan under broiler and broil until potatoes are caramelized, about 3 minutes. Transfer potatoes to serving platter with chicken.
         Place roasting pan on stove over medium heat. Add a splash of broth and stir up browned bits from the bottom of the pan. Strain; spoon juices over chicken and potatoes. Top with chopped oregano.`,
 			category: "dinner",
@@ -163,31 +173,32 @@ function App() {
 
 	const [recipeList, setRecipeList] = useState(mockData);
 
-	return (
-		<Router>
-			<RecipeContext.Provider value={{ recipeList, setRecipeList }}>
-				<div className='App'>
-					<Navigation />
-					<Switch>
-						<Route exact path='/' component={LandingPage} />
-						<Route exact path='/login' component={Login} />
-						<Route exact path='/register' component={Register} />
-						<Route exact path='/recipes' component={RecipeList} />
-						<Route exact path='/add-recipe' component={AddRecipe} />
-						<Route exact path='/recipes/:id' component={RecipeDetails} />
-					</Switch>
-					{/* <Switch>
+  return (
+    <Router>
+      <RecipeContext.Provider value={{ recipeList, setRecipeList }}>
+        <div className="App">
+          <h1>Secret Family Recipes</h1>
+          <Navigation />
+          {/* <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/recipes" component={RecipeList} />
+            <Route exact path="/add-recipe" component={AddRecipe} />
+            <Route exact path="/recipes/:id" component={RecipeDetails} />
+          </Switch> */}
+          <Switch>
             <ProtectedRoute exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <ProtectedRoute path="/recipes" component={RecipeList} />
             <ProtectedRoute path="/add-recipe" component={AddRecipe} />
             <ProtectedRoute exact path="/recipes/:id" component={RecipeDetails} />
-          </Switch> */}
-				</div>
-			</RecipeContext.Provider>
-		</Router>
-	);
+          </Switch>
+        </div>
+      </RecipeContext.Provider>
+    </Router>
+  );
 }
 
 export default App;

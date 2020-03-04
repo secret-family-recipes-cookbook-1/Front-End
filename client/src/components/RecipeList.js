@@ -1,5 +1,3 @@
-// Component maps over array of recipes and creates a RecipeCard for each.
-
 import React, { useContext } from "react";
 import RecipeContext from "../contexts/RecipeContext";
 import { Link } from "react-router-dom";
@@ -10,7 +8,7 @@ const RecipeList = () => {
 
   console.log("MOCK DATA", recipeList);
   return (
-    <div className="recipeList__container">
+    <div className="list-container">
       {recipeList.map(recipe => {
         return (
           <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
