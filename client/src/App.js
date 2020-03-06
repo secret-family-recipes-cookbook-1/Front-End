@@ -31,10 +31,9 @@ function App() {
         3 russet potatoes, peeled and quartered
         2/3 cup chicken broth, plus splash to deglaze pan
         chopped fresh oregano for garnish`
-      ],
-      source: "Chef John",
-      instructions: 
-        `Preheat oven to 425 degrees F (220 degrees C).
+			],
+			source: "Chef John",
+			instructions: `Preheat oven to 425 degrees F (220 degrees C).
         Lightly oil a large roasting pan.
         Place chicken pieces in large bowl.
         Season with salt, oregano, pepper, rosemary, and cayenne pepper.
@@ -173,13 +172,12 @@ function App() {
 
 	const [recipeList, setRecipeList] = useState([]);
 
-  return (
-    <Router>
-      <RecipeContext.Provider value={{ recipeList, setRecipeList }}>
-        <div className="App">
-          <h1>Secret Family Recipes</h1>
-          <Navigation />
-          {/* <Switch>
+	return (
+		<Router>
+			<RecipeContext.Provider value={{ recipeList, setRecipeList }}>
+				<div className='App'>
+					<Navigation />
+					{/* <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
@@ -187,18 +185,18 @@ function App() {
             <Route exact path="/add-recipe" component={AddRecipe} />
             <Route exact path="/recipes/:id" component={RecipeDetails} />
           </Switch> */}
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <ProtectedRoute exact path="/recipes" component={RecipeList} />
-            <ProtectedRoute exact path="/add-recipe" component={AddRecipe} />
-            <ProtectedRoute path="/recipes/:id" component={RecipeDetails} />
-          </Switch>
-        </div>
-      </RecipeContext.Provider>
-    </Router>
-  );
+					<Switch>
+						<Route exact path='/' component={LandingPage} />
+						<Route exact path='/login' component={Login} />
+						<Route exact path='/register' component={Register} />
+						<ProtectedRoute exact path='/recipes' component={RecipeList} />
+						<ProtectedRoute exact path='/add-recipe' component={AddRecipe} />
+						<ProtectedRoute path='/recipes/:id' component={RecipeDetails} />
+					</Switch>
+				</div>
+			</RecipeContext.Provider>
+		</Router>
+	);
 }
 
 export default App;

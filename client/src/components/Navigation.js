@@ -3,9 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 
 import "../utils/styles/css/navigation.css";
 
-const Navigation = props => {
-	// Need auth status to display SignInLinks or SignedOutLinks
-	//const links = <whatever tracks the authentication/> ? <SignedInLinks/> : <SignedOutLinks/>
+const Navigation = () => {
+	const loggedIn = localStorage.token;
 
 	return (
 		<>
@@ -14,26 +13,7 @@ const Navigation = props => {
 					<Link to='/'>Secret Family Recipes</Link>
 				</div>
 				<div className='navBar__links__container'>
-					{/*Will show if user is logged out */}
-					<ul className='navBar__signedOut__links'>
-						<li>
-							<NavLink to='/login'>Login</NavLink>
-						</li>
-						<li>
-							<NavLink to='/register'>Register</NavLink>
-						</li>
-					</ul>
-
-					{/*Will show if user is logged in */}
-					<ul className='navBar__signedIn__links'>
-						<li>
-							<NavLink to='/add-recipe'>Add Recipe</NavLink>
-						</li>
-						<li>
-							<a>Log Out</a>
-							{/*Will add an OnClick linked to a signOut function */}
-						</li>
-					</ul>
+					{loggedIn ? <SignedInLinks /> : <SignedOutLinks />}
 				</div>
 			</nav>
 		</>
@@ -41,3 +21,30 @@ const Navigation = props => {
 };
 
 export default Navigation;
+
+const SignedOutLinks = () => {
+	return (
+		<ul className='navBar__signedOut__links'>
+			<li>
+				<NavLink to='/login'>Login</NavLink>
+			</li>
+			<li>
+				<NavLink to='/register'>Register</NavLink>
+			</li>
+		</ul>
+	);
+};
+
+const SignedInLinks = () => {
+	return (
+		<ul className='navBar__signedIn__links'>
+			<li>
+				<NavLink to='/add-recipe'>Add Recipe</NavLink>
+			</li>
+			<li>
+				<a>Log Out</a>
+				{/*Will add an OnClick linked to a signOut function */}
+			</li>
+		</ul>
+	);
+};
