@@ -7,19 +7,20 @@ const RecipeCard = ({ recipe }) => {
     backgroundPosition: "center",
     backgroundSize: "cover",
     width: "275px",
-	height: "275px",
-	marginBottom: "10px"
+    height: "275px",
+    marginBottom: "10px"
   };
 
   return (
     <div className="recipe-card">
-      <figure style={figureStyle}></figure>
+      {!recipe.image ? (
+        <></>
+      ) : (
+        <figure style={figureStyle}></figure>
+      )}
       <main>
         <h1>{recipe.title}</h1>
         <h2>From {recipe.source}</h2>
-        <h2>
-          By {recipe.firstName} {recipe.lastName}
-        </h2>
         <h3>
           <span>{recipe.category}</span>
         </h3>

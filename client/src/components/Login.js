@@ -38,10 +38,8 @@ const FormikLogin = withFormik({
     axiosWithAuth()
       .post("/auth/login", values)
       .then(res => {
-        // localStorage.setItem("token", res.data.payload);
+        localStorage.setItem("token", res.data.token);
         console.log("Response From Login: ", res);
-        // const history = useHistory();
-        // history.push('/recipe/0');
       })
       .catch(err => {
         localStorage.removeItem("token");

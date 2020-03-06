@@ -171,7 +171,7 @@ function App() {
 		}
 	];
 
-	const [recipeList, setRecipeList] = useState(mockData);
+	const [recipeList, setRecipeList] = useState([]);
 
   return (
     <Router>
@@ -188,12 +188,12 @@ function App() {
             <Route exact path="/recipes/:id" component={RecipeDetails} />
           </Switch> */}
           <Switch>
-            <ProtectedRoute exact path="/" component={LandingPage} />
+            <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <ProtectedRoute path="/recipes" component={RecipeList} />
-            <ProtectedRoute path="/add-recipe" component={AddRecipe} />
-            <ProtectedRoute exact path="/recipes/:id" component={RecipeDetails} />
+            <ProtectedRoute exact path="/recipes" component={RecipeList} />
+            <ProtectedRoute exact path="/add-recipe" component={AddRecipe} />
+            <ProtectedRoute path="/recipes/:id" component={RecipeDetails} />
           </Switch>
         </div>
       </RecipeContext.Provider>
