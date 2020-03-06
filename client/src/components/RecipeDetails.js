@@ -23,33 +23,33 @@ const RecipeDetails = props => {
   //     category: '',
   // }
 
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/recipes/${props.match.params.id}`)
-  //     .then(res => {
-  //       console.log('[--SUCCESS--][GET]: RecipeDetails.js ~ ', res);
-  //       setLocalRecipe(res.data.recipe);
-  //     })
-  //     .catch(err => console.log('[#-ERROR-#][GET]: RecipeDetails.js ~ ', err))
-  // }, []);
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/recipes/${props.match.params.id}`)
+      .then(res => {
+        console.log('[--SUCCESS--][GET]: RecipeDetails.js ~ ', res);
+        setLocalRecipe(res.data);
+      })
+      .catch(err => console.log('[#-ERROR-#][GET]: RecipeDetails.js ~ ', err))
+  }, []);
 
   console.log("localRecipe ", localRecipe);
-  console.log("props.match.params.id ", props.match.params.id);
+  console.log("props.match.params.id ", props);
   
-  submitCallback(() => {
-    // handleEdit manages editing and PUTting of data to the API
-    // const allValues = {
-    //   ...values,
-    //   id: localRecipe.id
-    // };
-    // axiosWithAuth()
-    //   .put(`/recipes/${localRecipe.id}`, allValues)
-    //   .then(res => {
-    //     console.log('[--SUCCESS--][PUT]: RecipeDetails.js ~ ', res);
-    //     setLocalRecipe(res.data.recipe);
-    //   })
-    //   .catch(err => console.log('[#-ERROR-#][PUT]: RecipeDetails.js ~ ', err))
-  });
+  // submitCallback(() => {
+  //   handleEdit manages editing and PUTting of data to the API
+  //   const allValues = {
+  //     ...values,
+  //     id: localRecipe.id
+  //   };
+  //   axiosWithAuth()
+  //     .put(`/recipes/${localRecipe.id}`, allValues)
+  //     .then(res => {
+  //       console.log('[--SUCCESS--][PUT]: RecipeDetails.js ~ ', res);
+  //       setLocalRecipe(res.data.recipe);
+  //     })
+  //     .catch(err => console.log('[#-ERROR-#][PUT]: RecipeDetails.js ~ ', err))
+  // });
 
   const handleDelete = () => {
     // handleDelete manages DELETE of data from the API
@@ -68,23 +68,15 @@ const RecipeDetails = props => {
 
   const [values, handleChanges, handleSubmit] = useForm(
     {
-      title: localRecipe.title,
-      ingredients: localRecipe.ingredients,
-      source: localRecipe.source,
-      instructions: localRecipe.instructions,
-      category: localRecipe.category
+      title: '',
+      ingredients: '',
+      source: '',
+      instructions: '',
+      category: ''
     },
     submitCallback
   );
 
-  const figureStyle = {
-    backgroundImage: "url(" + localRecipe.image + ")",
-    backgroundRepeat: "none",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    width: "350px",
-    height: "350px"
-  };
 
   return (
     <div className="recipe-page">
@@ -149,7 +141,6 @@ const RecipeDetails = props => {
               </h3>
               <h4>{localRecipe.category}</h4>
             </div>
-            <figure style={figureStyle}></figure>
           </section>
 
           <main>
