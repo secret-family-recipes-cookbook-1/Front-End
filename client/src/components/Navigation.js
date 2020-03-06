@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 
 import "../utils/styles/css/navigation.css";
 
@@ -36,13 +36,20 @@ const SignedOutLinks = () => {
 };
 
 const SignedInLinks = () => {
+	const { push } = useHistory();
+
+	const logOut = () => {
+		localStorage.removeItem("token");
+		push("/login");
+	};
+
 	return (
 		<ul className='navBar__signedIn__links'>
 			<li>
 				<NavLink to='/add-recipe'>Add Recipe</NavLink>
 			</li>
 			<li>
-				<a>Log Out</a>
+				<a onClick={logOut}>Log Out</a>
 				{/*Will add an OnClick linked to a signOut function */}
 			</li>
 		</ul>
