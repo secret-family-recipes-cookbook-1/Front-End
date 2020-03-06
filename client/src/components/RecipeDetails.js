@@ -15,33 +15,51 @@ const RecipeDetails = props => {
   const [editing, setEditing] = useState(false); // Editing toggle. Defaults to FALSE
   // {
   //     title: '',
-  //     ingredients: [],
+  //     ingredients: '',
   //     rid: '',
+  //     uid: '',
   //     source: '',
-  //     fname: '',
-  //     lname: '',
-  //     body: '',
-  //     instructions: [],
+  //     instructions: '',
   //     category: '',
-  //     image: ''
   // }
 
-  useEffect(() => {
-    console.log("recipeList ", recipeList[props.match.params.id]);
-    setLocalRecipe(recipeList[props.match.params.id]); // This is for mock data
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get(`/recipes/${props.match.params.id}`)
+  //     .then(res => {
+  //       console.log('[--SUCCESS--][GET]: RecipeDetails.js ~ ', res);
+  //       setLocalRecipe(res.data.recipe);
+  //     })
+  //     .catch(err => console.log('[#-ERROR-#][GET]: RecipeDetails.js ~ ', err))
+  // }, []);
 
-    // ***** Cannot GET from API due to login errors and recipe endpoint requiring auth :(
-    // axiosWithAuth()
-    //     .get(`/recipes/${props.match.params.id}`)
-    //     .then(res => console.log(res))
-  }, []);
   console.log("localRecipe ", localRecipe);
-  const handleEdit = () => {
+  console.log("props.match.params.id ", props.match.params.id);
+  
+  submitCallback(() => {
     // handleEdit manages editing and PUTting of data to the API
-  };
+    // const allValues = {
+    //   ...values,
+    //   id: localRecipe.id
+    // };
+    // axiosWithAuth()
+    //   .put(`/recipes/${localRecipe.id}`, allValues)
+    //   .then(res => {
+    //     console.log('[--SUCCESS--][PUT]: RecipeDetails.js ~ ', res);
+    //     setLocalRecipe(res.data.recipe);
+    //   })
+    //   .catch(err => console.log('[#-ERROR-#][PUT]: RecipeDetails.js ~ ', err))
+  });
 
   const handleDelete = () => {
     // handleDelete manages DELETE of data from the API
+    // axiosWithAuth()
+    //   .delete(`/recipes/${localRecipe.id}`)
+    //   .then(res => {
+    //     console.log('[--SUCCESS--][DELETE]: RecipeDetails.js ~ ', res);
+    //     setLocalRecipe(res.data.recipe);
+    //   })
+    //   .catch(err => console.log('[#-ERROR-#][DELETE]: RecipeDetails.js ~ ', err))
   };
 
   const submitCallback = () => {
@@ -50,13 +68,11 @@ const RecipeDetails = props => {
 
   const [values, handleChanges, handleSubmit] = useForm(
     {
-      title: "",
-      ingredients: [],
-      source: "",
-      body: "",
-      instructions: [],
-      category: "",
-      image: ""
+      title: localRecipe.title,
+      ingredients: localRecipe.ingredients,
+      source: localRecipe.source,
+      instructions: localRecipe.instructions,
+      category: localRecipe.category
     },
     submitCallback
   );
@@ -84,7 +100,7 @@ const RecipeDetails = props => {
                 onChange={handleChanges}
               />
               <label>
-                {`By: ${localRecipe.firstName} ${localRecipe.lastName} From: `}
+                By:
                 <input
                   type="text"
                   name="source"
@@ -104,42 +120,20 @@ const RecipeDetails = props => {
                 <option value="beverage">Beverage</option>
               </select>
             </div>
-            <figure>
-              <input
-                type="file"
-                name="image"
-                value={values.image}
-                onChange={handleChanges}
-              />
-            </figure>
-          </section>
-
-          <section>
-            <textarea name="body" value={values.body}></textarea>
           </section>
 
           <section>
             <div>
               <h2>Ingredients</h2>
-              <ul>
-                {" "}
-                {/* Map over data array and create list */}
-                {localRecipe.ingredients.map((item, index) => {
-                  return <li>{`Step ${index + 1}: ${item}`}</li>;
-                })}
-              </ul>
+              <textarea name="ingredients" onChange={handleChanges}>
+                {values.ingredients}
+              </textarea>
             </div>
             <div>
               <h2>Instructions</h2>
-              <ol>
-                {" "}
-                {/* Map over data array and create list */}
-                {/* {localRecipe.ingredients.map((item) => {
-                                    return (
-                                        <li>{item}</li>
-                                    );
-                                })} */}
-              </ol>
+              <textarea name="instructions" onChange={handleChanges}>
+                {values.instructions}
+              </textarea>
             </div>
           </section>
         </form>
