@@ -41,11 +41,13 @@ const FormikLogin = withFormik({
 			.post("/auth/login", values)
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("userId", res.data.id);
 				console.log("Response From Login: ", res);
 				history.push("/recipes");
 			})
 			.catch(err => {
 				localStorage.removeItem("token");
+				localStorage.removeItem("userId");
 				console.log("Error From Login: ", err);
 			});
 	}

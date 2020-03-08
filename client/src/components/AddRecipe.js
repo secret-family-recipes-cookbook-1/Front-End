@@ -2,6 +2,7 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const AddRecipe = ({ errors, touched }) => {
   return (
@@ -37,22 +38,12 @@ const AddRecipe = ({ errors, touched }) => {
       <Field
         as="textarea"
         type="text"
-        name="body"
-        cols="50"
-        rows="6"
-        placeholder="Description of dish, memories, etc (optional)"
-      />
-      {touched.body && errors.body && <div>{errors.body}</div>}
-      <br />
-      <Field
-        as="textarea"
-        type="text"
-        name="steps"
+        name="instructions"
         cols="50"
         rows="10"
-        placeholder="Steps to make your dish"
+        placeholder="instructions to make your dish"
       />
-      {touched.steps && errors.steps && <div>{errors.steps}</div>}
+      {touched.instructions && errors.instructions && <div>{errors.instructions}</div>}
       <br />
       <button type="submit">Submit Recipe</button>
     </Form>
@@ -60,14 +51,14 @@ const AddRecipe = ({ errors, touched }) => {
 };
 
 const FormikAddRecipe = withFormik({
-  mapPropsToValues({ title, source, category, ingredients, body, steps }) {
+  mapPropsToValues({ title, source, category, ingredients, instructions }) {
     return {
+      user_id: parseInt(localStorage.getItem('userId'), 10),
       title: title || "",
       source: source || "",
       category: category || "",
       ingredients: ingredients || "",
-      body: body || "",
-      steps: steps || ""
+      instructions: instructions || ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -81,18 +72,18 @@ const FormikAddRecipe = withFormik({
     ingredients: Yup.string()
       .required("You must enter ingredients.")
       .min(20, "Ingredients too short."),
-    steps: Yup.string()
-      .required("You must enter steps for your recipe.")
-      .min(20, "Steps too short.")
+    instructions: Yup.string()
+      .required("You must enter instructions for your recipe.")
+      .min(20, "instructions too short.")
   }),
-  handleSubmit(values, { resetForm }) {
-    axios
-      .post("https://reqres.in/api/users", values)
+  handleSubmit(values, history) {
+    axiosWithAuth()
+      .post("/recipes", values)
       .then(res => {
-        console.log("Success!", res);
-        resetForm();
+        console.log("[--SUCCESS--][POST]: AddRecipe.js ~ ", res);
+        history.push('/recipes');
       })
-      .catch(err => console.log(err.response));
+      .catch(err => console.log("[#-ERROR-#][POST]: AddRecipe.js ~ ", values, err));
   }
 })(AddRecipe);
 
