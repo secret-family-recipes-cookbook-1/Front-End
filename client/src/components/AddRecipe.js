@@ -42,7 +42,9 @@ const AddRecipe = ({ errors, touched }) => {
         rows="10"
         placeholder="instructions to make your dish"
       />
-      {touched.instructions && errors.instructions && <div>{errors.instructions}</div>}
+      {touched.instructions && errors.instructions && (
+        <div>{errors.instructions}</div>
+      )}
       <br />
       <button type="submit">Submit Recipe</button>
     </Form>
@@ -57,7 +59,7 @@ const FormikAddRecipe = withFormik({
       ingredients: ingredients || "",
       instructions: instructions || "",
       category: category || "",
-      user_id: parseInt(localStorage.getItem('userId'), 10)
+      user_id: parseInt(localStorage.getItem("userId"), 10)
     };
   },
   validationSchema: Yup.object().shape({
@@ -80,9 +82,11 @@ const FormikAddRecipe = withFormik({
       .post("/recipes", values)
       .then(res => {
         console.log("[--SUCCESS--][POST]: AddRecipe.js ~ ", res);
-        history.push('/recipes');
+        history.push("/recipes");
       })
-      .catch(err => console.log("[#-ERROR-#][POST]: AddRecipe.js ~ ", values, err));
+      .catch(err =>
+        console.log("[#-ERROR-#][POST]: AddRecipe.js ~ ", values, err)
+      );
   }
 })(AddRecipe);
 

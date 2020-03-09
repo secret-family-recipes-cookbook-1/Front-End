@@ -13,25 +13,25 @@ import RecipeDetails from "./components/RecipeDetails";
 import RecipeList from "./components/RecipeList";
 
 function App() {
-	const [recipeList, setRecipeList] = useState([]);
+  const [recipeList, setRecipeList] = useState([]);
 
-	return (
-		<Router>
-			<RecipeContext.Provider value={{ recipeList, setRecipeList }}>
-				<div className='App'>
-					<Navigation />
-					<Switch>
-						<ProtectedRoute exact path='/' component={RecipeList} />
-						<Route exact path='/login' component={Login} />
-						<Route exact path='/register' component={Register} />
-						<ProtectedRoute exact path='/recipes' component={RecipeList} />
-						<ProtectedRoute exact path='/add-recipe' component={AddRecipe} />
-						<ProtectedRoute path='/recipes/:id' component={RecipeDetails} />
-					</Switch>
-				</div>
-			</RecipeContext.Provider>
-		</Router>
-	);
+  return (
+    <Router>
+      <RecipeContext.Provider value={{ recipeList, setRecipeList }}>
+        <div className="App">
+          <Navigation />
+          <Switch>
+            <ProtectedRoute exact path="/" component={RecipeList} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <ProtectedRoute exact path="/recipes" component={RecipeList} />
+            <ProtectedRoute exact path="/add-recipe" component={AddRecipe} />
+            <ProtectedRoute path="/recipes/:id" component={RecipeDetails} />
+          </Switch>
+        </div>
+      </RecipeContext.Provider>
+    </Router>
+  );
 }
 
 export default App;
