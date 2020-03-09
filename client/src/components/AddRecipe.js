@@ -1,5 +1,6 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
@@ -52,14 +53,15 @@ const AddRecipe = ({ errors, touched }) => {
 };
 
 const FormikAddRecipe = withFormik({
-  mapPropsToValues({ title, source, category, ingredients, instructions }) {
+  mapPropsToValues({ title, source, category, ingredients, instructions, user_id, history }) {
     return {
       title: title || "",
       source: source || "",
       ingredients: ingredients || "",
       instructions: instructions || "",
       category: category || "",
-      user_id: parseInt(localStorage.getItem("userId"), 10)
+      user_id: parseInt(localStorage.getItem("userId"), 10),
+      history: history
     };
   },
   validationSchema: Yup.object().shape({
@@ -77,11 +79,14 @@ const FormikAddRecipe = withFormik({
       .required("You must enter instructions for your recipe.")
       .min(10, "instructions too short.")
   }),
-  handleSubmit(values, history) {
+  handleSubmit({ title, source, category, ingredients, instructions, user_id, history }) {
+    const values = { title, source, category, ingredients, instructions, user_id, };
+    console.log("Submitting values: ", values);
     axiosWithAuth()
-      .post("/recipes", values)
+      // .post("/recipes", values)
+      .post("https://reqres.in/api/users", values)
       .then(res => {
-        console.log("[--SUCCESS--][POST]: AddRecipe.js ~ ", res);
+        console.log("[--SUCCESS--][POST]: AddRecipe.js ~ ", values, res);
         history.push("/recipes");
       })
       .catch(err =>
