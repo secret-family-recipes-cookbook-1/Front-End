@@ -1,7 +1,6 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const AddRecipe = ({ errors, touched }) => {
@@ -53,12 +52,12 @@ const AddRecipe = ({ errors, touched }) => {
 const FormikAddRecipe = withFormik({
   mapPropsToValues({ title, source, category, ingredients, instructions }) {
     return {
-      user_id: parseInt(localStorage.getItem('userId'), 10),
       title: title || "",
       source: source || "",
-      category: category || "",
       ingredients: ingredients || "",
-      instructions: instructions || ""
+      instructions: instructions || "",
+      category: category || "",
+      user_id: parseInt(localStorage.getItem('userId'), 10)
     };
   },
   validationSchema: Yup.object().shape({
@@ -71,10 +70,10 @@ const FormikAddRecipe = withFormik({
     category: Yup.string().required("You must choose a category."),
     ingredients: Yup.string()
       .required("You must enter ingredients.")
-      .min(20, "Ingredients too short."),
+      .min(10, "Ingredients too short."),
     instructions: Yup.string()
       .required("You must enter instructions for your recipe.")
-      .min(20, "instructions too short.")
+      .min(10, "instructions too short.")
   }),
   handleSubmit(values, history) {
     axiosWithAuth()

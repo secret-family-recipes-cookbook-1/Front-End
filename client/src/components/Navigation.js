@@ -1,10 +1,9 @@
 import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 
-import "../utils/styles/css/navigation.css";
 
 const Navigation = () => {
-	const loggedIn = localStorage.token;
+	const loggedIn = localStorage.getItem("token");
 
 	return (
 		<>
@@ -13,7 +12,7 @@ const Navigation = () => {
 					<Link to='/'>Secret Family Recipes</Link>
 				</div>
 				<div className='navBar__links__container'>
-					{loggedIn ? <SignedInLinks /> : <SignedOutLinks />}
+					{loggedIn ? ( <SignedInLinks /> ) : ( <SignedOutLinks /> )}
 				</div>
 			</nav>
 		</>
