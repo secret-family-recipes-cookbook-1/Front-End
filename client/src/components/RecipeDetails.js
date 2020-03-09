@@ -149,10 +149,7 @@ const RecipeDetails = props => {
               ></textarea>
             </div>
             <button onClick={handleEdit}>Submit Changes</button>
-            <button
-              onClick={handleDelete}>
-              Delete Recipe
-            </button>
+            <button onClick={handleDelete}>Delete Recipe</button>
           </section>
         </form>
       )}

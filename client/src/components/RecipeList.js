@@ -9,12 +9,12 @@ const RecipeList = () => {
 
   useEffect(() => {
     axiosWithAuth()
-      .get('/recipes')
+      .get("/recipes")
       .then(res => {
-        console.log('[--SUCCESS--][GET]: RecipeList.js ~ ', res);
+        console.log("[--SUCCESS--][GET]: RecipeList.js ~ ", res);
         setRecipeList(res.data.recipe);
       })
-      .catch(err => console.log('[#-ERROR-#][GET]: RecipeList.js ~ ', err))
+      .catch(err => console.log("[#-ERROR-#][GET]: RecipeList.js ~ ", err));
   }, []);
 
   console.log("MOCK DATA", recipeList);
